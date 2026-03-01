@@ -1,3 +1,5 @@
+'use server'
+
 import { NextRequest, NextResponse } from 'next/server';
 import { runSequentialWorkflow } from '@/lib/flows/sequentialFlow';
 import { runSupervisorWorkflow } from '@/lib/flows/supervisorFlow';

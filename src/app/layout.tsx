@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { TooltipProvider } from "@/components/ui/tooltip"
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "AI Workflow Sandbox | Sequential vs Supervisor",
-  description: "Test multiple LLM agent flows with Next.js and Gemini",
+  title: "ZenFlow | AI Agentic Workflow Sandbox",
+  description: "Test Sequential and Supervisor AI agent workflows powered by Google Gemini. Compare model responses across multi-agent pipelines.",
 };
 
 export default function RootLayout({
@@ -15,9 +13,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.className} bg-zinc-950 text-zinc-100 antialiased`}>
-        {children}
+    <html lang="en" style={{ height: '100%' }}>
+      <body style={{ height: '100%', margin: 0 }}>
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
   );

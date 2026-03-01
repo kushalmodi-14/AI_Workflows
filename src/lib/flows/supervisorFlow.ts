@@ -10,7 +10,6 @@ export const runSupervisorWorkflow = async (
     const supervisor = getSupervisorModel(modelId);
     const trace: AgentTraceStep[] = [];
 
-    // Supervisor analyzes the intent and picks agents
     const supervisorPrompt = `You are a Supervisor for a team of specialized AI agents.
   Based on the user prompt: "${prompt}", decide which agents should be called to provide the best response.
   
@@ -31,7 +30,6 @@ export const runSupervisorWorkflow = async (
 
     let currentContext = ragContext || '';
 
-    // Run the selected agents in the plan's order
     for (const agentType of routing.selectedAgents) {
         let agentOutput;
         let agentReasoning;
@@ -61,7 +59,6 @@ export const runSupervisorWorkflow = async (
         }
     }
 
-    // Final content is from the last agent, or the accumulated context if no agents selected
     const lastTrace = trace[trace.length - 1];
     const finalContent = lastTrace ? lastTrace.output : "No agents were selected by the supervisor to answer this.";
 

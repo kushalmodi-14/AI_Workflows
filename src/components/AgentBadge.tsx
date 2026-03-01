@@ -11,9 +11,9 @@ export const AgentBadge: React.FC<AgentBadgeProps> = ({ agent, size = 'md' }) =>
   const isSm = size === 'sm';
   
   const config = {
-    search: { icon: Search, color: 'bg-blue-500/10 text-blue-400 border-blue-500/20', label: 'Search' },
-    code: { icon: Code, color: 'bg-purple-500/10 text-purple-400 border-purple-500/20', label: 'Code' },
-    summarize: { icon: FileText, color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20', label: 'Summarize' },
+    search: { icon: Search, color: 'bg-[#2E6F40]/10 text-[#2E6F40] border-[#2E6F40]/20', label: 'Search' },
+    code: { icon: Code, color: 'bg-emerald-100 text-[#2E6F40] border-emerald-200', label: 'Code' },
+    summarize: { icon: FileText, color: 'bg-emerald-50 text-emerald-800 border-emerald-100', label: 'Summarize' },
   };
 
   const { icon: Icon, color, label } = config[agent];

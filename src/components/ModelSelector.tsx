@@ -2,7 +2,14 @@
 
 import React from 'react';
 import { GEMINI_MODELS, GeminiModelId } from '@/types';
-import { Box } from 'lucide-react';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Cpu } from 'lucide-react';
 
 interface ModelSelectorProps {
   value: GeminiModelId;
@@ -11,19 +18,29 @@ interface ModelSelectorProps {
 
 export const ModelSelector: React.FC<ModelSelectorProps> = ({ value, onChange }) => {
   return (
-    <div className="relative inline-flex items-center gap-2 bg-zinc-900/80 border border-zinc-800 rounded-2xl px-3 py-1.5 focus-within:ring-1 focus-within:ring-indigo-500/50 transition-all">
-      <Box size={14} className="text-zinc-500" />
-      <select 
-        value={value}
-        onChange={(e) => onChange(e.target.value as GeminiModelId)}
-        className="bg-transparent text-sm text-zinc-300 font-medium outline-none cursor-pointer pr-2 appearance-none"
-      >
+    <Select value={value} onValueChange={(v) => onChange(v as GeminiModelId)}>
+      <SelectTrigger className="w-full h-auto py-2.5 px-3 rounded-xl border-border bg-muted/50 hover:bg-muted focus:ring-2 focus:ring-ring/40 focus:border-ring transition-all">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
+            <Cpu size={13} className="text-primary-foreground" />
+          </div>
+          <div className="flex flex-col items-start min-w-0">
+            <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Model</span>
+            <SelectValue placeholder="Select model" className="text-xs font-bold text-foreground truncate" />
+          </div>
+        </div>
+      </SelectTrigger>
+      <SelectContent className="rounded-xl border-border shadow-xl">
         {GEMINI_MODELS.map((model) => (
-          <option key={model.id} value={model.id} className="bg-zinc-950 text-white">
+          <SelectItem
+            key={model.id}
+            value={model.id}
+            className="text-sm font-medium rounded-lg cursor-pointer focus:bg-accent focus:text-accent-foreground"
+          >
             {model.label}
-          </option>
+          </SelectItem>
         ))}
-      </select>
-    </div>
+      </SelectContent>
+    </Select>
   );
 };

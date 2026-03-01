@@ -8,7 +8,6 @@ export const runSequentialWorkflow = async (
 ) => {
     const trace: AgentTraceStep[] = [];
 
-    // Step 1: Search Agent
     const searchResult = await runSearchAgent(prompt, modelId, ragContext);
     trace.push({
         agent: 'search',
@@ -17,7 +16,6 @@ export const runSequentialWorkflow = async (
         timestamp: new Date().toISOString(),
     });
 
-    // Step 2: Code Agent
     const codeResult = await runCodeAgent(prompt, modelId, searchResult.content);
     trace.push({
         agent: 'code',
@@ -26,7 +24,6 @@ export const runSequentialWorkflow = async (
         timestamp: new Date().toISOString(),
     });
 
-    // Step 3: Summarize Agent
     const finalResult = await runSummarizeAgent(prompt, modelId, `${searchResult.content}\n\n${codeResult.content}`);
     trace.push({
         agent: 'summarize',
