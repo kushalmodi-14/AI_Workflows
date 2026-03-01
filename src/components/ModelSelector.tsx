@@ -9,7 +9,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Cpu } from 'lucide-react';
+import { Cpu, ChevronDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface ModelSelectorProps {
   value: GeminiModelId;
@@ -19,25 +20,59 @@ interface ModelSelectorProps {
 export const ModelSelector: React.FC<ModelSelectorProps> = ({ value, onChange }) => {
   return (
     <Select value={value} onValueChange={(v) => onChange(v as GeminiModelId)}>
-      <SelectTrigger className="w-full h-auto py-2.5 px-3 rounded-xl border-border bg-muted/50 hover:bg-muted focus:ring-2 focus:ring-ring/40 focus:border-ring transition-all">
-        <div className="flex items-center gap-2.5 min-w-0">
-          <div className="flex-shrink-0 w-7 h-7 rounded-lg bg-primary flex items-center justify-center">
-            <Cpu size={13} className="text-primary-foreground" />
+      <SelectTrigger
+        className={cn(
+          'w-full h-auto py-3 px-3.5 rounded-2xl border-2 bg-white/[0.03] border-white/[0.08]',
+          'hover:bg-white/[0.05] hover:border-violet-500/40',
+          'focus:ring-0 focus:border-violet-500/60 focus:shadow-lg focus:shadow-violet-900/20',
+          'transition-all duration-250 group',
+          '[&>svg]:hidden' // hide default chevron
+        )}
+      >
+        <div className="flex items-center gap-3 min-w-0 w-full">
+          {/* Icon */}
+          <div className="flex-shrink-0 w-8 h-8 rounded-xl bg-gradient-to-br from-violet-600 to-violet-500 flex items-center justify-center shadow-md shadow-violet-900/40">
+            <Cpu size={13} className="text-white" />
           </div>
-          <div className="flex flex-col items-start min-w-0">
-            <span className="text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">Model</span>
-            <SelectValue placeholder="Select model" className="text-xs font-bold text-foreground truncate" />
+
+          {/* Label */}
+          <div className="flex flex-col items-start min-w-0 flex-1">
+            <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-0.5">Model</span>
+            <SelectValue
+              placeholder="Select model"
+              className="text-xs font-bold text-white truncate"
+            />
           </div>
+
+          {/* Custom chevron */}
+          <ChevronDown
+            size={13}
+            className="flex-shrink-0 text-slate-600 group-hover:text-slate-400 group-data-[state=open]:rotate-180 transition-all duration-200"
+          />
         </div>
       </SelectTrigger>
-      <SelectContent className="rounded-xl border-border shadow-xl">
-        {GEMINI_MODELS.map((model) => (
+
+      <SelectContent className="rounded-2xl border border-white/[0.09] bg-[#0A0E1A]/95 backdrop-blur-xl shadow-2xl shadow-black/60 p-1.5">
+        {GEMINI_MODELS.map((model, i) => (
           <SelectItem
             key={model.id}
             value={model.id}
-            className="text-sm font-medium rounded-lg cursor-pointer focus:bg-accent focus:text-accent-foreground"
+            className={cn(
+              'text-sm font-semibold rounded-xl cursor-pointer py-2.5 px-3 my-0.5',
+              'text-slate-300 focus:text-white',
+              'focus:bg-gradient-to-r focus:from-violet-600/25 focus:to-violet-500/10',
+              'data-[state=checked]:text-violet-300 data-[state=checked]:bg-violet-500/10',
+              'transition-all duration-150',
+              '[&>span:first-child]:hidden' // hide checkmark container for custom styling
+            )}
           >
-            {model.label}
+            <div className="flex items-center gap-2.5 pl-0">
+              <div className={cn(
+                'w-1.5 h-1.5 rounded-full flex-shrink-0',
+                model.id === value ? 'bg-violet-400' : 'bg-slate-700'
+              )} />
+              {model.label}
+            </div>
           </SelectItem>
         ))}
       </SelectContent>

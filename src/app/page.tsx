@@ -50,10 +50,8 @@ export default function Home() {
   return (
     <main className="h-screen w-full bg-muted/40 flex overflow-hidden p-3 gap-3">
 
-      {/* ===== SIDEBAR ===== */}
       <aside className="w-[288px] xl:w-[308px] flex-shrink-0 flex flex-col gap-3 overflow-y-auto no-scrollbar">
 
-        {/* Brand */}
         <Card className="py-0 gap-0">
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
@@ -74,7 +72,6 @@ export default function Home() {
           </CardContent>
         </Card>
 
-        {/* Model + Workflow */}
         <Card className="py-0 gap-0">
           <CardContent className="p-4 space-y-4">
 
@@ -102,7 +99,6 @@ export default function Home() {
           </CardContent>
         </Card>
 
-        {/* RAG */}
         <Card className="py-0 gap-0">
           <CardContent className="p-4">
             <SidebarSection title="Knowledge Context">
@@ -115,7 +111,6 @@ export default function Home() {
           </CardContent>
         </Card>
 
-        {/* Agent Nodes */}
         <Card className="py-0 gap-0 flex-1">
           <CardHeader className="p-4 pb-0">
             <CardTitle className="flex items-center justify-between">
@@ -167,9 +162,7 @@ export default function Home() {
 
       </aside>
 
-      {/* ===== CHAT MAIN AREA ===== */}
       <section className="flex-1 min-w-0 relative">
-        {/* Subtle bg gradients */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-xl">
           <div className="absolute -top-24 -right-24 w-[400px] h-[400px] rounded-full bg-primary/4 blur-3xl" />
           <div className="absolute -bottom-16 -left-16 w-[300px] h-[300px] rounded-full bg-sky-500/3 blur-3xl" />
